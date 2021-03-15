@@ -5,7 +5,6 @@ import numpy as np
 from keras.models import load_model
 import json
 import random
-import tkinter
 from tkinter import *
 
 lemmatizer = WordNetLemmatizer()
@@ -83,25 +82,39 @@ def send():
 
 
 base = Tk()
-base.title("Hello")
+base.title("ChatBot")
 base.geometry("400x500")
 base.resizable(width=FALSE, height=FALSE)
+main_menu = Menu(base)
+# Create the submenu
+file_menu = Menu(base)
+file_menu.add_command(label="New")
+file_menu.add_command(label="Save As")
+file_menu.add_command(label="Exit")
+main_menu.add_cascade(label="File", menu=file_menu)
+# Add the rest of the menu options to the main menu
+main_menu.add_command(label="Edit")
+main_menu.add_command(label="Quit")
+base.config(menu=main_menu)
 # Create Chat window
-ChatLog = Text(base, bd=0, bg="white", height="8", width="50", font="Arial", )
+ChatLog = Text(base, bd=1, bg="light blue", height="8", width="50", font="Nunito")
+
 ChatLog.config(state=DISABLED)
 # Bind scrollbar to Chat window
-scrollbar = Scrollbar(base, command=ChatLog.yview, cursor="heart")
+scrollbar = Scrollbar(base, command=ChatLog.yview())
 ChatLog['yscrollcommand'] = scrollbar.set
 # Create Button to send message
-SendButton = Button(base, font=("Verdana", 12, 'bold'), text="Send", width="12", height=5,
-                    bd=0, bg="#32de97", activebackground="#3c9d9b", fg='#ffffff',
+SendButton = Button(base, font=("Redressed", 12, 'bold'), text="Send", width="10", height=2,
+                    bd=0, bg="#ff9e9e", activebackground="#ff6c6c", fg='#ffffff',
                     command=send)
 # Create the box to enter message
-EntryBox = Text(base, bd=0, bg="white", width="29", height="5", font="Arial")
+EntryBox = Text(base, bd=0, bg="white", width="29", height="2", font="Nunito")
 # EntryBox.bind("<Return>", send)
+
 # Place all components on the screen
-scrollbar.place(x=376, y=6, height=386)
+scrollbar.place(x=375, y=6, height=386)
 ChatLog.place(x=6, y=6, height=386, width=370)
-EntryBox.place(x=128, y=401, height=90, width=265)
-SendButton.place(x=6, y=401, height=90)
+EntryBox.place(x=120, y=400, height=90, width=257)
+SendButton.place(x=6, y=400, height=90)
+
 base.mainloop()
