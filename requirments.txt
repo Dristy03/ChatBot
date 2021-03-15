@@ -1,0 +1,8 @@
+pip install tensorflow
+pip install keras
+pip install pickle
+pip install nltk
+pip install json
+pip install numpy
+pip install random
+pip install tkinter
